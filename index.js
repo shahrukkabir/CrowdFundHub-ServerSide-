@@ -21,10 +21,22 @@ const client = new MongoClient(uri, {
   },
 });
 
+async function run() {
+  try {
+    const campaignCollection = client.db("campaingDB").collection("campaing");
+    const donationCollection = client.db("campaingDB").collection("donation");
+
 
 app.get("/", (req, res) => {
   res.send("All Campaign");
 });
+
+app.get("/campaign", async (req, res) => {
+  const cursor = campaignCollection.find();
+  const result = await cursor.toArray();
+  res.send(result);
+});
+
 
 app.listen(port, () => {
   console.log(`Crowd Funding server is running on port: ${port}`);
