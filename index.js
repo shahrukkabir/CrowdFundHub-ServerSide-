@@ -37,6 +37,11 @@ app.get("/campaign", async (req, res) => {
   res.send(result);
 });
 
+app.get("/donation", async (req, res) => {
+  const cursor = donationCollection.find();
+  const result = await cursor.toArray();
+  res.send(result);
+});
 
 app.listen(port, () => {
   console.log(`Crowd Funding server is running on port: ${port}`);
